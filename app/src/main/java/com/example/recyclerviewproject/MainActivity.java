@@ -1,15 +1,11 @@
 package com.example.recyclerviewproject;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,23 +28,20 @@ private ImageView addNewContactBtn;
 
         fullnameEt = findViewById(R.id.et_main_contactFullname);
         addNewContactBtn=findViewById(R.id.iv_main_addNewContact);
-        addNewContactBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(fullnameEt.length()>0) {
-                    if(editingItemPosition>-1) {
-                        adapter.updateContact(fullnameEt.getText().toString(),editingItemPosition);
-                        editingItemPosition=-1;
-                        addNewContactBtn.setImageResource(R.drawable.ic_add_white_24dp);
+        addNewContactBtn.setOnClickListener(v -> {
+            if(fullnameEt.length()>0) {
+                if(editingItemPosition>-1) {
+                    adapter.updateContact(fullnameEt.getText().toString(),editingItemPosition);
+                    editingItemPosition=-1;
+                    addNewContactBtn.setImageResource(R.drawable.ic_add_white_24dp);
 
-                    }else {
-                        adapter.addNewContact(fullnameEt.getText().toString());
-                        recyclerView.smoothScrollToPosition(0);
-
-                    }
-                    fullnameEt.setText("");
+                }else {
+                    adapter.addNewContact(fullnameEt.getText().toString());
+                    recyclerView.smoothScrollToPosition(0);
 
                 }
+                fullnameEt.setText("");
+
             }
         });
     }

@@ -1,12 +1,9 @@
 package com.example.recyclerviewproject;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +13,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     private static final ArrayList<String> contacts = new ArrayList<>();
 private static ItemEventListener itemEventListener;
     public  ContactsAdapter(ItemEventListener itemEventListener) {
-        this.itemEventListener=itemEventListener;
+        ContactsAdapter.itemEventListener =itemEventListener;
         contacts.add("Ruthann Trustrie");
         contacts.add("Peadar Dawtrey");
         contacts.add("Felipe Bradtke");
@@ -83,20 +80,12 @@ private static ItemEventListener itemEventListener;
         public void bindContact (String fullname) {
             fullnametv.setText(fullname);
             firstCharactertv.setText(fullname.substring(0,1));
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    itemEventListener.onItemClick(fullname,getAdapterPosition());
-                }
-            });
+            itemView.setOnClickListener(v -> itemEventListener.onItemClick(fullname,getAbsoluteAdapterPosition()));
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    contacts.remove(getAdapterPosition());
-                    notifyItemRemoved (getAdapterPosition());
-                    return false;
-                }
+            itemView.setOnLongClickListener(v -> {
+                contacts.remove(getAbsoluteAdapterPosition());
+                notifyItemRemoved (getAbsoluteAdapterPosition());
+                return false;
             });
         }
     }
