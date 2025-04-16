@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">RecyclerView Project</string>
     <string name="enter_how_much_cookies_you_want">Enter How Much Cookies You Want</string>
+    <string name="enter_contact_fullname_here">Enter contact fullname here...</string>
 </resources>
